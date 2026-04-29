@@ -1,0 +1,1 @@
+Simulated database failure triggered by using phone number: "9999999999" as lookup key.

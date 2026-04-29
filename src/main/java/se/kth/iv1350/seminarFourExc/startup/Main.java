@@ -18,11 +18,15 @@ import se.kth.iv1350.seminarFourExc.view.View;
 public class Main {
     /**
      * The main method used to start the application. 
-     * <p>
+     * 
      * Initializes a demo setup containing a customer, a bike and
      * the required registries. This demo data is required so that
      * parts of the program that need existing domain objects can run.
-     * </p>
+     * 
+     * To trigger a {@link CustomerNotFoundException}, use any phone number
+     * that is different from {@code demoCustomerPhoneNo} and {@code "9999999999"},
+     * which is the phone number used to trigger a {@link DatabaseFailureException}.
+     * One of these phone numbers is provided in the call to {@code runFakeExecution}. 
      * 
      * @param args The application does not take any command lines.
      */

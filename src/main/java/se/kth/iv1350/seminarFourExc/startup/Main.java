@@ -43,7 +43,7 @@ public class Main {
         RepairOrderRegistry repairOrderRegistry = RepairOrderRegistry.getInstance();
         Controller contr = new Controller(customerRegistry, repairOrderRegistry, excFileLogger);
         View view = new View(contr);
-        view.runFakeExecution(demoCustomerPhoneNo);
+        view.runFakeExecution("9999999999");
     }
     
 }

@@ -183,7 +183,7 @@ public class RepairOrder {
    /**
     * Updates this repair order after the customer has accepted the repair.
     * The order state is set to {@code ACCEPTED} and an estimated completion
-    * date and a final cost is calculated.
+    * date is calculated.
     */
    public void updateAfterAcceptance() {
        this.state = RepairOrderState.ACCEPTED;

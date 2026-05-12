@@ -55,18 +55,17 @@ public class View {
             CustomerDto customerDto = contr.searchCustomer(customerPhoneNo);
             System.out.println("Searching for customer.\n");
             System.out.println("--- Found customer ---");
-            System.out.println(customerDto);
+            printCustomer(customerDto);
             
-            System.out.println("\n-----------------------------------------------------\n");
-
+            printDivider(); 
 
             problemDescr = "The customer's bike always gets a flat tire";
             System.out.println("Registers the customer's problem description and creates an order.\n");
             Integer orderId = contr.registerProblemDescription(problemDescr, customerPhoneNo);
             
            
-            System.out.println("\n-----------------------------------------------------\n");
-
+            printDivider();
+            
             String diagnosticReport = "A wheel is missing";
             List<RepairTask> tasks = new ArrayList<>();
             tasks.add(new RepairTask("Replace brake pads"));
@@ -74,8 +73,8 @@ public class View {
             System.out.println("Updates the repair order after diagnosis.\n");
             contr.updateAfterDiagnostic(tasks, diagnosticReport, orderId);
             
-            System.out.println("\n-----------------------------------------------------\n");
-
+            printDivider();
+            
             System.out.println("Customer accepts the repair tasks and cost proposed by the receptionist.\n");
             repairOrderDto = contr.handleCustomerDecision(RepairOrderState.ACCEPTED, orderId);
 
@@ -90,5 +89,15 @@ public class View {
         }
         
     }
+    
+    private void printDivider() {
+        System.out.println("\n-----------------------------------------------------\n");
+
+    }
+    
+   private void printCustomer(CustomerDto customerDto) {
+       String stringFormat = StringRepresentationUtil.customerToString(customerDto);
+       System.out.println(stringFormat);
+   }
     
 }

@@ -18,7 +18,8 @@ public class RepairOrderView implements RepairOrderObserver {
     @Override
     public void repairOrderUpdate(RepairOrder repairOrder) {
         System.out.println("--- Updated Repair Order ---");
-        System.out.println(repairOrder);
+        String stringFormat = StringRepresentationUtil.repairOrderToString(repairOrder);
+        System.out.println(stringFormat);
     }
 
 }

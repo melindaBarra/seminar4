@@ -5,7 +5,6 @@
 package se.kth.iv1350.seminarFourExc.model.dto;
 import se.kth.iv1350.seminarFourExc.model.Bike;
 import se.kth.iv1350.seminarFourExc.model.ReadableBike;
-import se.kth.iv1350.seminarFourExc.util.StringRepresentationUtil;
 
 /**
  * A Data Transfer Object (DTO) that provides read-only access to 
@@ -48,10 +47,6 @@ public class BikeDto implements ReadableBike{
         return serialNo;
     }
     
-   @Override
-   public String toString() {
-       return StringRepresentationUtil.bikeToString(this);
-   }
     
 
 

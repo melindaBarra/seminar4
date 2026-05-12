@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package se.kth.iv1350.seminarFourExc.util;
+package se.kth.iv1350.seminarFourExc.view;
 import java.util.List;
 import  se.kth.iv1350.seminarFourExc.model.ReadableBike;
 import  se.kth.iv1350.seminarFourExc.model.ReadableCustomer;
@@ -10,9 +10,7 @@ import  se.kth.iv1350.seminarFourExc.model.RepairOrder;
 import se.kth.iv1350.seminarFourExc.model.RepairTask;
 
 /**
- * Utility class that provides helper methods for building string representations in the model-layer's classes.
- * 
- * The methods in this class support the implementation of {@code toString()} methods.
+ * Utility class used by the View layer to building string representations of DTOs and domain objects.
  * 
  */
 public final class StringRepresentationUtil {
@@ -121,7 +119,7 @@ public final class StringRepresentationUtil {
         StringRepresentationUtil.addCommaSeparator(builder);
         StringRepresentationUtil.addField(builder, "PhoneNo", customer.getPhoneNo());
         builder.append("]\n");
-        builder.append(customer.getBike());
+        builder.append(bikeToString(customer.getBike()));
         return builder.toString();
     }
     
@@ -144,7 +142,7 @@ public final class StringRepresentationUtil {
         StringRepresentationUtil.addField(builder, "Date of order placement", repairOrder.getDate());
         StringRepresentationUtil.addNewLineSeparator(builder);
         
-        StringRepresentationUtil.addField(builder, "Date of esstimated completion", repairOrder.getEstimatedCompletionDate());
+        StringRepresentationUtil.addField(builder, "Date of estimated completion", repairOrder.getEstimatedCompletionDate());
         StringRepresentationUtil.addNewLineSeparator(builder);
 
         StringRepresentationUtil.addField(builder, "Problem Description", repairOrder.getProblemDescription());
@@ -163,7 +161,7 @@ public final class StringRepresentationUtil {
         StringRepresentationUtil.addField(builder, "Final cost", repairOrder.getFinalCost());
         StringRepresentationUtil.addNewLineSeparator(builder);
         
-        builder.append(repairOrder.getCustomer());
+        builder.append(customerToString(repairOrder.getCustomer()));
         
         return builder.toString();
     }
@@ -185,7 +183,7 @@ public final class StringRepresentationUtil {
         }
         
         for (RepairTask task : tasks) {
-            builder.append(task);
+            builder.append(repairTaskToString(task));
             StringRepresentationUtil.addNewLineSeparator(builder);
         } 
 

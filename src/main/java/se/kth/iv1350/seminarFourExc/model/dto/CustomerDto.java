@@ -5,7 +5,6 @@
 package se.kth.iv1350.seminarFourExc.model.dto;
 import se.kth.iv1350.seminarFourExc.model.Customer;
 import se.kth.iv1350.seminarFourExc.model.ReadableCustomer;
-import se.kth.iv1350.seminarFourExc.util.StringRepresentationUtil;
 
 /**
  * A Data Transfer Object (DTO) that provides read-only access to 
@@ -13,7 +12,7 @@ import se.kth.iv1350.seminarFourExc.util.StringRepresentationUtil;
  * <p>
  * This class is used to safely transfer 
  * customer data between different layers of the application 
- * without exposing the internal state of the domain model..
+ * without exposing the internal state of the domain model.
  * </p>
  */
 public class CustomerDto implements ReadableCustomer{
@@ -54,10 +53,6 @@ public class CustomerDto implements ReadableCustomer{
    }
     
 
-   @Override
-   public String toString() {
-       return StringRepresentationUtil.customerToString(this);
-   }
 
 
 }

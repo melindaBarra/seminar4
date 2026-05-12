@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package se.kth.iv1350.seminarFourExc.model;
-import se.kth.iv1350.seminarFourExc.util.StringRepresentationUtil;
 
 /**
  * Represents a bike owned by a {@link Customer}.
@@ -79,14 +78,5 @@ public class Bike implements ReadableBike{
         return this.serialNo.equals(other.serialNo);
     }
     
-    
-    /**
-     * Returns a string representation of this {@link bike}. 
-     * @return the string representation.
-     */
-    @Override
-    public String toString() {
-        return StringRepresentationUtil.bikeToString(this);
-    }
       
 }

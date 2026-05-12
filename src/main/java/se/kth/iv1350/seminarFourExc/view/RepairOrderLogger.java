@@ -17,7 +17,7 @@ import se.kth.iv1350.seminarFourExc.model.RepairOrderObserver;
 
 public class RepairOrderLogger implements RepairOrderObserver {
     private final Logger logger;
-    
+
     /**
      * Creates an instance of {@link RepairOrderLogger}.
      *
@@ -28,7 +28,8 @@ public class RepairOrderLogger implements RepairOrderObserver {
     }
 
     @Override
-    public void repairOrderUpdate(RepairOrder order) {
-        logger.log(order.toString());
+    public void repairOrderUpdate(RepairOrder repairOrder) {
+        String stringFormat = StringRepresentationUtil.repairOrderToString(repairOrder);
+        logger.log(stringFormat);
     }
 }

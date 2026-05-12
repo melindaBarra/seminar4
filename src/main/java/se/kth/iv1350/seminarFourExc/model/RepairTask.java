@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package se.kth.iv1350.seminarFourExc.model;
-import se.kth.iv1350.seminarFourExc.util.StringRepresentationUtil;
 
 /**
  * Represents a single task within a {@link RepairOrder}. 
@@ -57,12 +56,4 @@ public class RepairTask {
         return this.taskDescription;
     }
     
-    /**
-     * Returns a string representation of this {@link RepairTask}. 
-     * @return the string representation.
-     */
-    @Override
-    public String toString() {
-        return StringRepresentationUtil.repairTaskToString(this);
-    }
 }

@@ -4,7 +4,6 @@
  */
 package se.kth.iv1350.seminarFourExc.model;
 
-import se.kth.iv1350.seminarFourExc.util.StringRepresentationUtil;
 
 /**
  * Represents a customer who brings a {@link Bike} to the bike repair workshop.
@@ -91,14 +90,5 @@ public class Customer implements ReadableCustomer{
         return this.phoneNo.equals(other.phoneNo);
     }
     
-    
-    /**
-     * Returns a string representation of this {@link Customer}. 
-     * @return the string representation.
-     */
-    @Override
-    public String toString() {
-        return StringRepresentationUtil.customerToString(this);
-    }
 }
 

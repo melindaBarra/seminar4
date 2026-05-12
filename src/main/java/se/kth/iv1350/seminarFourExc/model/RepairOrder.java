@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 import java.security.SecureRandom;
-import se.kth.iv1350.seminarFourExc.util.StringRepresentationUtil;
 
 /**
  * Represents a repair order created when a {@link Customer} reports a problem.
@@ -176,7 +175,7 @@ public class RepairOrder {
         addRepairTasks(tasks);
         this.diagnosticReport = diagnosticReport;
         this.baseCost = calculateBaseCost();
-        this.finalCost = baseCost;
+        this.finalCost = calculateFinalCost();
         this.state = RepairOrderState.READY_FOR_APPROVAL;
         notifyObservers();
     }
@@ -187,21 +186,11 @@ public class RepairOrder {
     * date and a final cost is calculated.
     */
    public void updateAfterAcceptance() {
-       this.finalCost = calculateFinalCost();
        this.state = RepairOrderState.ACCEPTED;
        estimateCompletionDate();
        notifyObservers();
    }
    
-   
-    /**
-     * Returns a string representation of this {@code RepairOrder}. 
-     * @return the string representation.
-     */
-    @Override
-    public String toString() {
-        return StringRepresentationUtil.repairOrderToString(this);
-    }
 
     /**
       * Calculates and sets the estimated completion date for this repair order.

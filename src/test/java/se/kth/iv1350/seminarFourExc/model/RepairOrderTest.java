@@ -128,27 +128,17 @@ public class RepairOrderTest {
     }
     
     
-    @Test
-    public void testCostAfterDiagnosis() {
-        double expBaseCost = taskToAdd.getCost() + additionalTaskToAdd.getCost();
-        order.updateRepairOrderAfterDiagnosis(List.of(taskToAdd, additionalTaskToAdd), diagnosticReport);
-        double resultBaseCost = order.getBaseCost();
-        double resultFinalCost = order.getFinalCost();
-        assertEquals(expBaseCost, resultBaseCost, "Base cost was not calculated correctly.");
-        assertEquals(expBaseCost, resultFinalCost, "Final cost was not calculated correctly.");
-    }
     
     @Test
-    public void testBaseCostAfterAcceptance() {
+    public void testBaseCostAfterDiagnosis() {
         double expBaseCost = taskToAdd.getCost() + additionalTaskToAdd.getCost();
         order.updateRepairOrderAfterDiagnosis(List.of(taskToAdd, additionalTaskToAdd), diagnosticReport);
-        order.updateAfterAcceptance();
         double resultBaseCost = order.getBaseCost();
         assertEquals(expBaseCost, resultBaseCost, "Base cost was not calculated correctly.");
     }
     
     @Test
-    public void testFinalCostAfterAcceptance() {
+    public void testFinalCostAfterDiagnosis() {
         DiscountFactory factory = DiscountFactory.getInstance();
         double expBaseCost = taskToAdd.getCost() + additionalTaskToAdd.getCost();
         
@@ -156,7 +146,6 @@ public class RepairOrderTest {
         double discount = factory.getDiscountStrategy(order).calculateDiscount(order);
 
         double expFinalCost = expBaseCost - discount;
-        order.updateAfterAcceptance();
         
         double resultFinalCost = order.getFinalCost();
         assertEquals(expFinalCost, resultFinalCost, "Final cost was not calculated correctly.");

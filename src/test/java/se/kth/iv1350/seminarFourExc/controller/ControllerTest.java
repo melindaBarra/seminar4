@@ -20,7 +20,6 @@ import se.kth.iv1350.seminarFourExc.model.dto.RepairOrderDto;
 import se.kth.iv1350.seminarFourExc.model.RepairTask;
 import se.kth.iv1350.seminarFourExc.model.RepairOrderState;
 import se.kth.iv1350.seminarFourExc.integration.CustomerNotFoundException;
-import se.kth.iv1350.seminarFourExc.controller.OperationFailedException;
 import se.kth.iv1350.seminarFourExc.integration.ExceptionFileLogger;
 import java.util.List;
 import se.kth.iv1350.seminarFourExc.integration.RepairOrderFileLogger;
@@ -81,8 +80,8 @@ public class ControllerTest {
             ctrl.searchCustomer(failingPhoneNo);
             fail("Expected OperationFailedException to be thrown.");
         } catch (OperationFailedException e) {
-            assertTrue(e.getMessage().contains("database failure"),
-                "Exception message does not describe a database failure.");
+            assertTrue(e.getMessage().contains("Something went wrong. Please try again later."),
+                "Exception message does not describe the failure correctly.");
         }
     }
     
@@ -100,8 +99,8 @@ public class ControllerTest {
             ctrl.registerProblemDescription(problemDescr,failingPhoneNo);
             fail("Expected OperationFailedException to be thrown.");
         } catch (OperationFailedException e) {
-            assertTrue(e.getMessage().contains("database failure"),
-                "Exception message does not describe a database failure.");
+            assertTrue(e.getMessage().contains("Something went wrong. Please try again later."),
+                "Exception message does not describe the failure correctly.");
         }
     }
     

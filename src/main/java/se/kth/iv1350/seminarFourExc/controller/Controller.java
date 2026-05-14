@@ -99,7 +99,7 @@ public class Controller {
             return repairOrder.getOrderId();
         } catch (DatabaseFailureException e) {
             logger.log(e.getMessage());
-            throw new OperationFailedException("Something went wrong! Could not register repair order", e);
+            throw new OperationFailedException("Something went wrong. Please try again later.", e);
         }
         
     }

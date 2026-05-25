@@ -31,6 +31,7 @@ public class Main {
      * @param args The application does not take any command lines.
      */
     public static void main(String[] args){
+        
         String demoBikeSerialNo = "SVE1234567";
         Bike demoBike = new Bike("Monark", "Karin", demoBikeSerialNo);
         CustomerRegistry customerRegistry = CustomerRegistry.getInstance();

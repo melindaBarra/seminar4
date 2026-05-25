@@ -1,1 +1,5 @@
-Simulated database failure triggered by using phone number: "9999999999" as lookup key.
+se.kth.iv1350.seminarFourExc.integration.DatabaseFailureException: Simulated database failure triggered by using phone number: "9999999999" as lookup key.
+	at se.kth.iv1350.seminarFourExc.integration.CustomerRegistry.findCustomerByPhoneNo(CustomerRegistry.java:61)
+	at se.kth.iv1350.seminarFourExc.controller.Controller.searchCustomer(Controller.java:84)
+	at se.kth.iv1350.seminarFourExc.view.View.runFakeExecution(View.java:57)
+	at se.kth.iv1350.seminarFourExc.startup.Main.main(Main.java:46)

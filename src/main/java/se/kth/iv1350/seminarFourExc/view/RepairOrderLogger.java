@@ -5,7 +5,8 @@
 package se.kth.iv1350.seminarFourExc.view;
 
 import se.kth.iv1350.seminarFourExc.integration.Logger;
-import se.kth.iv1350.seminarFourExc.model.RepairOrder;
+import se.kth.iv1350.seminarFourExc.integration.RepairOrderRegistryObserver;
+import se.kth.iv1350.seminarFourExc.model.dto.RepairOrderDto;
 import se.kth.iv1350.seminarFourExc.model.RepairOrderObserver;
 
 /**
@@ -15,7 +16,7 @@ import se.kth.iv1350.seminarFourExc.model.RepairOrderObserver;
  * to a file using the provided {@link Logger} every time the order gets updated.
  */
 
-public class RepairOrderLogger implements RepairOrderObserver {
+public class RepairOrderLogger implements RepairOrderObserver, RepairOrderRegistryObserver {
     private final Logger logger;
 
     /**
@@ -28,8 +29,18 @@ public class RepairOrderLogger implements RepairOrderObserver {
     }
 
     @Override
-    public void repairOrderUpdate(RepairOrder repairOrder) {
-        String stringFormat = StringRepresentationUtil.repairOrderToString(repairOrder);
+    public void repairOrderUpdate(RepairOrderDto repairOrderDto) {
+        logUpdatedOrder(repairOrderDto);
+    }
+    
+    @Override
+    public void newRepairOrderCreated(RepairOrderDto repairOrderDto) {
+        logUpdatedOrder(repairOrderDto);
+    }
+    
+    private void logUpdatedOrder(RepairOrderDto repairOrderDto) {
+        String stringFormat = StringRepresentationUtil.repairOrderToString(repairOrderDto);
         logger.log(stringFormat);
     }
+    
 }

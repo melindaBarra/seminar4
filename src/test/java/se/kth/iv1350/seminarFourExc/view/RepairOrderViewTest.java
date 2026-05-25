@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import se.kth.iv1350.seminarFourExc.model.RepairOrder;
+import se.kth.iv1350.seminarFourExc.model.dto.RepairOrderDto;
 import se.kth.iv1350.seminarFourExc.model.Bike;
 import se.kth.iv1350.seminarFourExc.model.Customer;
 
@@ -50,7 +51,7 @@ public class RepairOrderViewTest {
     public void testRepairOrderUpdatePrintsOrderData() {
  
         String result = invokeUpdateAndReadOutput(repairOrder);
-        String expResult = StringRepresentationUtil.repairOrderToString(repairOrder);
+        String expResult = StringRepresentationUtil.repairOrderToString(new RepairOrderDto(repairOrder));
 
         assertTrue(result.contains(expResult), "Updated repair order data was printed incorrectly.");
     }
@@ -61,7 +62,7 @@ public class RepairOrderViewTest {
     */
    private String invokeUpdateAndReadOutput(RepairOrder repairOrder) {
        RepairOrderView view = new RepairOrderView();
-       view.repairOrderUpdate(repairOrder);
+       view.repairOrderUpdate(new RepairOrderDto(repairOrder));
        return outContent.toString();
    }
 

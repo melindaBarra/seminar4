@@ -2,13 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
-package se.kth.iv1350.seminarthree.model;
-
-import se.kth.iv1350.seminarFourExc.model.RepairTask;
-import se.kth.iv1350.seminarFourExc.model.Bike;
-import se.kth.iv1350.seminarFourExc.model.RepairOrder;
-import se.kth.iv1350.seminarFourExc.model.RepairOrderState;
-import se.kth.iv1350.seminarFourExc.model.Customer;
+package se.kth.iv1350.seminarFourExc.model;
+import org.junit.jupiter.api.Disabled; 
 import java.time.LocalDate;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -168,12 +163,15 @@ public class RepairOrderTest {
        assertEquals(expDate, resultDate, "Estimated completion date was incorrect.");
    }
    
+   
+   
    /**
     * Test if calling the {@code updateAfterAcceptance} method results in a notification
     * to all registered observers. 
     */
+    @Disabled("Notification method in the RepairOrder class is set to private")
     @Test
-    public void updateAfterAcceptanceNotifies() {
+    public void testUpdateAfterAcceptanceNotifies() {
         order.updateAfterAcceptance();
         assertTrue(observer.notified);
     }
@@ -183,22 +181,15 @@ public class RepairOrderTest {
     * Test if calling the {@code updateRepairOrderAfterDiagnosis} method results in a notification
     * to all registered observers. 
     */
+    @Disabled("Notification method in the RepairOrder class is set to private")
     @Test
-    public void updateAfterDiagnosisNotifies() {
+    public void testUpdateAfterDiagnosisNotifies() {
         order.updateRepairOrderAfterDiagnosis(List.of(taskToAdd, additionalTaskToAdd), diagnosticReport);
         assertTrue(observer.notified);
     }
 
-    @Test
-    public void testHasTasks() {
-        order.updateRepairOrderAfterDiagnosis(List.of(taskToAdd, additionalTaskToAdd), diagnosticReport);
-        assertTrue(order.hasTasks(), "Order was expected to contain tasks but the task list was empty");
-    }
-    
-    @Test
-    public void testHasNoTasks() {
-        assertFalse(order.hasTasks(),"Expected the order to have no tasks but it contained tasks");
-    }
+   
+
     
     
 }

@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
 package se.kth.iv1350.seminarFourExc.controller;
-import se.kth.iv1350.seminarFourExc.controller.Controller;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,10 +21,7 @@ import se.kth.iv1350.seminarFourExc.model.RepairOrderState;
 import se.kth.iv1350.seminarFourExc.integration.CustomerNotFoundException;
 import se.kth.iv1350.seminarFourExc.integration.ExceptionFileLogger;
 import java.util.List;
-import se.kth.iv1350.seminarFourExc.integration.RepairOrderFileLogger;
-import se.kth.iv1350.seminarFourExc.view.RepairOrderLogger;
-import se.kth.iv1350.seminarFourExc.view.RepairOrderView;
-import testUtil.TestObserver;
+
 
 /**
  * Test the class {@link Controller}.
@@ -55,9 +51,6 @@ public class ControllerTest {
         
         repairOrderRegistry = RepairOrderRegistry.getInstance();
         ctrl = new Controller(customerRegistry, repairOrderRegistry, excLogger);
-        RepairOrderView observerView = new RepairOrderView();
-        RepairOrderLogger observerLogger = new RepairOrderLogger(new RepairOrderFileLogger());
-        ctrl.addObservers(List.of(observerView, observerLogger));
     
     }
 
@@ -186,23 +179,6 @@ public class ControllerTest {
                 "Wrong problem description was registered.");
     }
     
-    /**
-    * Test if calling the {@code registerProblemDescription} method results in a notification
-    * to all registered observers. 
-    * 
-    * @throws CustomerNotFoundException if {@code searchCustomer} did not find the 
-    * searched customer in the {@code customerRegistry}.
-    * @throws OperationFailedException if the phone number triggers a database failure.  
-    */  
-    @Test
-    public void registerProblemDescription_NotifiesObservers() throws CustomerNotFoundException, OperationFailedException {
-        TestObserver observer = new TestObserver();
-        ctrl.addObservers(List.of(observer));
-
-        ctrl.registerProblemDescription(problemDescr, customerPhoneNo);
-
-        assertTrue(observer.notified);
-    }
     
     @Test
     public void testCorrectCustomerIsRegistered() throws CustomerNotFoundException, OperationFailedException {

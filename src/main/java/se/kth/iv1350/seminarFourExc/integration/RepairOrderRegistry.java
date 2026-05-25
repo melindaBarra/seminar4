@@ -5,9 +5,12 @@
 package se.kth.iv1350.seminarFourExc.integration;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import se.kth.iv1350.seminarFourExc.model.RepairOrder;
+import se.kth.iv1350.seminarFourExc.model.dto.RepairOrderDto;
 
 
 /**
@@ -17,9 +20,11 @@ import se.kth.iv1350.seminarFourExc.model.RepairOrder;
 public class RepairOrderRegistry {
     private final Map<Integer, RepairOrder> repairOrders = new HashMap<>();
     private static final RepairOrderRegistry INSTANCE = new RepairOrderRegistry();
+    private final List<RepairOrderRegistryObserver> observers = new ArrayList<>();
+
+
+
    
-    
-    
     /**
      * In order to implement a Singleton pattern this constructor is set to private,
      * ensuring that only one instance of this class exists.
@@ -42,6 +47,7 @@ public class RepairOrderRegistry {
      */
     public void addRepairOrder(RepairOrder repairOrder) {
         repairOrders.put(repairOrder.getOrderId(), repairOrder);
+        notifyObservers(new RepairOrderDto(repairOrder));
     }
     
     /**
@@ -54,4 +60,26 @@ public class RepairOrderRegistry {
         return repairOrders.get(orderId);
     }
     
+    
+    /**
+     * Registers multiple observers that will be notified whenever a this {@code repairOrderRegistry} changes.
+     * The observers are received from the controller layer.
+     * 
+     * @param observers The new observers. Must not be {@code null}.
+     */
+    public void addObservers(List<RepairOrderRegistryObserver> observers) {
+        this.observers.addAll(observers);
+    }
+
+
+    /**
+     * Notifies all registered observers that this {@code repairOrderRegistry} has been updated.
+     */   
+    private void notifyObservers(RepairOrderDto repairOrderDto) {
+        for(RepairOrderRegistryObserver observer : observers) {
+            observer.newRepairOrderCreated(repairOrderDto);
+        }
+    }
+    
+ 
 }

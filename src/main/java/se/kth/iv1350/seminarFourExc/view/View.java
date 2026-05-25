@@ -31,7 +31,9 @@ public class View {
         this.contr = contr;
         RepairOrderView observerView = new RepairOrderView();
         RepairOrderLogger observerLogger = new RepairOrderLogger(new RepairOrderFileLogger());
-        contr.addObservers(List.of(observerView, observerLogger));
+        contr.addOrderObservers(List.of(observerView, observerLogger));
+        contr.addRegistryObservers(List.of(observerView, observerLogger));
+
     }
     
     
@@ -82,8 +84,10 @@ public class View {
 
             System.out.println("\n---Customer leaves the workshop---");
             
-        } catch (CustomerNotFoundException | OperationFailedException e) {
-            System.out.println("ERROR! " + e.getMessage());
+        } catch (CustomerNotFoundException e) {
+            System.out.println("ERROR: No customer with the searched phone number '" +customerPhoneNo +"' exists.");
+        } catch (OperationFailedException e) {
+            System.out.println("ERROR: Something went wrong. Please try again later.");
         } catch (Exception exc) {
             System.out.println("ERROR: Unexpected failure.");
         }

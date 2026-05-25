@@ -17,7 +17,7 @@ import se.kth.iv1350.seminarFourExc.integration.CustomerNotFoundException;
 import se.kth.iv1350.seminarFourExc.integration.DatabaseFailureException;
 import se.kth.iv1350.seminarFourExc.integration.Logger;
 import se.kth.iv1350.seminarFourExc.model.RepairOrderObserver;
-
+import se.kth.iv1350.seminarFourExc.integration.RepairOrderRegistryObserver;
 /**
  * This is the application's only controller. All method calls to the model
  * must pass through this controller.
@@ -28,7 +28,9 @@ public class Controller {
     private final Logger logger;
     private final CustomerRegistry customerRegistry;
     private final RepairOrderRegistry repairOrderRegistry;
-    private final List<RepairOrderObserver> observers = new ArrayList<>();
+    private final List<RepairOrderObserver> orderObservers = new ArrayList<>();
+
+
     
     /**
      * Creates an instance of {@link Controller}.
@@ -45,14 +47,25 @@ public class Controller {
 
 
     /**
-     * Registers multiple observers that will be notified whenever a repair order changes.
+     * Registers multiple observers that will be notified whenever a {@code repairOrder} changes.
      * The observers are received from the view layer.
      * 
      * @param observers The new observers. Must not be {@code null}.
      */
-    public void addObservers(List<RepairOrderObserver> observers) {
-        this.observers.addAll(observers);
+    public void addOrderObservers(List<RepairOrderObserver> observers) {
+        this.orderObservers.addAll(observers);
     }
+    
+    /**
+     * Registers multiple observers that will be notified whenever a {@code repairOrderRegistry} changes.
+     * The observers are received from the view layer.
+     * 
+     * @param observers The new observers. Must not be {@code null}.
+     */   
+    public void addRegistryObservers(List<RepairOrderRegistryObserver> observers) {
+        this.repairOrderRegistry.addObservers(observers);
+    }
+
     
     
     /**
@@ -71,7 +84,7 @@ public class Controller {
             Customer customer = customerRegistry.findCustomerByPhoneNo(phoneNo);
             return new CustomerDto(customer);
         } catch (DatabaseFailureException e) {
-            logger.log(e.getMessage());
+            logger.logException(e);
             throw new OperationFailedException("Something went wrong. Please try again later.", e);
         }
     }
@@ -93,15 +106,13 @@ public class Controller {
         try {
             Customer customer = customerRegistry.findCustomerByPhoneNo(phoneNo);
             RepairOrder repairOrder = new RepairOrder(problemDescr, customer);
-            repairOrder.addObservers(observers);
-            repairOrder.notifyObservers();
+            repairOrder.addObservers(this.orderObservers);
             repairOrderRegistry.addRepairOrder(repairOrder);
             return repairOrder.getOrderId();
         } catch (DatabaseFailureException e) {
-            logger.log(e.getMessage());
+            logger.logException(e);
             throw new OperationFailedException("Something went wrong. Please try again later.", e);
-        }
-        
+        }    
     }
     
     /**

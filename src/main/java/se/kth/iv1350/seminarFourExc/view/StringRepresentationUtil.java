@@ -6,8 +6,8 @@ package se.kth.iv1350.seminarFourExc.view;
 import java.util.List;
 import  se.kth.iv1350.seminarFourExc.model.ReadableBike;
 import  se.kth.iv1350.seminarFourExc.model.ReadableCustomer;
-import  se.kth.iv1350.seminarFourExc.model.RepairOrder;
-import se.kth.iv1350.seminarFourExc.model.RepairTask;
+import  se.kth.iv1350.seminarFourExc.model.dto.RepairOrderDto;
+import se.kth.iv1350.seminarFourExc.model.dto.RepairTaskDto;
 
 /**
  * Utility class used by the View layer to building string representations of DTOs and domain objects.
@@ -83,7 +83,7 @@ public final class StringRepresentationUtil {
      * @param task the specified {@code RepairTask}.
      * @return A string representation of the specified {@code RepairTask}.
      */
-    public static String repairTaskToString(RepairTask task) {
+    public static String repairTaskToString(RepairTaskDto task) {
         StringBuilder builder = new StringBuilder("Repair task");
         builder.append("[");
 
@@ -126,42 +126,42 @@ public final class StringRepresentationUtil {
     
     
     /**
-     * Returns a string representation a specified {@link RepairOrder}. 
-     * @param repairOrder the specified {@code RepairOrder}.
-     * @return A string representation of the specified {@code RepairOrder}.
+     * Returns a string representation a specified {@link RepairOrderDto}. 
+     * @param repairOrderDto the specified {@code RepairOrderDto}.
+     * @return A string representation of the specified {@code RepairOrderDto}.
      */
-        public static String repairOrderToString(RepairOrder repairOrder) {
+        public static String repairOrderToString(RepairOrderDto repairOrderDto) {
         StringBuilder builder = new StringBuilder();
 
-        StringRepresentationUtil.addField(builder, "Order ID",repairOrder.getOrderId());
+        StringRepresentationUtil.addField(builder, "Order ID",repairOrderDto.getOrderId());
         StringRepresentationUtil.addNewLineSeparator(builder);
 
-        StringRepresentationUtil.addField(builder, "State", repairOrder.getState());
+        StringRepresentationUtil.addField(builder, "State", repairOrderDto.getState());
         StringRepresentationUtil.addNewLineSeparator(builder);
         
-        StringRepresentationUtil.addField(builder, "Date of order placement", repairOrder.getDate());
+        StringRepresentationUtil.addField(builder, "Date of order placement", repairOrderDto.getDate());
         StringRepresentationUtil.addNewLineSeparator(builder);
         
-        StringRepresentationUtil.addField(builder, "Date of estimated completion", repairOrder.getEstimatedCompletionDate());
+        StringRepresentationUtil.addField(builder, "Date of estimated completion", repairOrderDto.getEstimatedCompletionDate());
         StringRepresentationUtil.addNewLineSeparator(builder);
 
-        StringRepresentationUtil.addField(builder, "Problem Description", repairOrder.getProblemDescription());
-        StringRepresentationUtil.addNewLineSeparator(builder);
-
-        
-        StringRepresentationUtil.addField(builder, "Diagnostic report", repairOrder.getDiagnosticReport());
+        StringRepresentationUtil.addField(builder, "Problem Description", repairOrderDto.getProblemDescription());
         StringRepresentationUtil.addNewLineSeparator(builder);
 
         
-        appendRepairTasks(builder, repairOrder);
+        StringRepresentationUtil.addField(builder, "Diagnostic report", repairOrderDto.getDiagnosticReport());
+        StringRepresentationUtil.addNewLineSeparator(builder);
+
         
-        StringRepresentationUtil.addField(builder, "Base cost", repairOrder.getBaseCost());
+        appendRepairTasks(builder, repairOrderDto);
+        
+        StringRepresentationUtil.addField(builder, "Base cost", repairOrderDto.getBaseCost());
         StringRepresentationUtil.addNewLineSeparator(builder);
         
-        StringRepresentationUtil.addField(builder, "Final cost", repairOrder.getFinalCost());
+        StringRepresentationUtil.addField(builder, "Final cost", repairOrderDto.getFinalCost());
         StringRepresentationUtil.addNewLineSeparator(builder);
         
-        builder.append(customerToString(repairOrder.getCustomer()));
+        builder.append(customerToString(repairOrderDto.getCustomer()));
         
         return builder.toString();
     }
@@ -170,19 +170,19 @@ public final class StringRepresentationUtil {
      * Adds all repair tasks that belongs to a {@code repairOrder  }
      * to the given string builder, each on a new line.
      * 
-     * @param repairOrder order that stores all added repair tasks. 
+     * @param repairOrderDto order that stores all added repair tasks. 
      * @param builder the given StringBuilder.
      */
-   private static void appendRepairTasks(StringBuilder builder, RepairOrder repairOrder) {
-        List<RepairTask> tasks = repairOrder.getRepairTasks();
+   private static void appendRepairTasks(StringBuilder builder, RepairOrderDto repairOrder) {
+        List<RepairTaskDto> tasks = repairOrder.getRepairTasks();
 
-        if(!repairOrder.hasTasks()) {
+        if(tasks.isEmpty()) {
             addField(builder, "Repair tasks", null);
             StringRepresentationUtil.addNewLineSeparator(builder);
             return;
         }
         
-        for (RepairTask task : tasks) {
+        for (RepairTaskDto task : tasks) {
             builder.append(repairTaskToString(task));
             StringRepresentationUtil.addNewLineSeparator(builder);
         } 

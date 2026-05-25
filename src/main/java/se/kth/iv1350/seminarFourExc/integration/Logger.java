@@ -14,4 +14,5 @@ package se.kth.iv1350.seminarFourExc.integration;
  */
 public interface Logger {
     void log(String message);
+    void logException(Exception e);
 }

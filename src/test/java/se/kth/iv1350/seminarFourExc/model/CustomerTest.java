@@ -2,9 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
-package se.kth.iv1350.seminarthree.model;
-import se.kth.iv1350.seminarFourExc.model.Bike;
-import se.kth.iv1350.seminarFourExc.model.Customer;
+package se.kth.iv1350.seminarFourExc.model;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;

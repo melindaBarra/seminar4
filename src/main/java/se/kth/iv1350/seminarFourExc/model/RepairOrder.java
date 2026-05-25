@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 import java.security.SecureRandom;
+import se.kth.iv1350.seminarFourExc.model.dto.RepairOrderDto;
+
 
 /**
  * Represents a repair order created when a {@link Customer} reports a problem.
@@ -50,10 +52,9 @@ public class RepairOrder {
         this.customer = customer;
         this.date = LocalDate.now();
         this.orderId = generateOrderId();
-        this.state = RepairOrderState.NEWLY_CREATED;
         this.baseCost = 0;
-        this.finalCost = baseCost;
- 
+        this.finalCost = baseCost; 
+        this.state = RepairOrderState.NEWLY_CREATED;
     }
 
 
@@ -67,38 +68,17 @@ public class RepairOrder {
         this.observers.addAll(observers);
     }
 
-    
+
     /**
      * Notifies all registered observers that this {@code repairOrder} has been updated.
      */   
-    public void notifyObservers() {
+    private void notifyObservers() {
+        RepairOrderDto repairOrderDto = new RepairOrderDto(this);
         for(RepairOrderObserver observer : observers) {
-            observer.repairOrderUpdate(this);
+            observer.repairOrderUpdate(repairOrderDto);
         }
     }
     
-    
-    /**
-     * Adds all repair tasks given by a technician to this repair order.
-     * This method is called after the diagnostic phase when the
-     * technician has identified multiple tasks that need to be performed.
-     *
-     * @param tasks the list of repair tasks to add.
-     */
-    private void addRepairTasks(List<RepairTask> tasks) {
-        repairTasks.addAll(tasks);
-    }
-
-    /**
-     * Generates a unique identifier for this repair order.
-     * The value is randomly generated and used to distinguish
-     * this order from all other repair orders in the system.
-     *
-     * @return a randomly generated order ID
-     */
-    private Integer generateOrderId() {
-        return idGenerator.nextInt(MAX_ORDER_ID_VALUE);
-    }
     
     public void setDate(LocalDate date) {
         this.date = date;
@@ -152,15 +132,8 @@ public class RepairOrder {
     public int getStandardCompletion() {
         return this.STANDARD_COMPLETION;
     }
-    
-    /**
-     * Checkes if the order's list of {@code RepairTask} is empty.
-     * This method is used for the string representation of a RepairOrder.
-     * @return true if the order contains one or more repair tasks, else false.
-     */  
-   public boolean hasTasks() {
-        return !repairTasks.isEmpty();
-   }
+ 
+
     
     /**
      * Updates this {@code RepairOrder} after the diagnostic phase has been completed.
@@ -191,6 +164,31 @@ public class RepairOrder {
        notifyObservers();
    }
    
+   
+    
+    
+    /**
+     * Adds all repair tasks given by a technician to this repair order.
+     * This method is called after the diagnostic phase when the
+     * technician has identified multiple tasks that need to be performed.
+     *
+     * @param tasks the list of repair tasks to add.
+     */
+    private void addRepairTasks(List<RepairTask> tasks) {
+        repairTasks.addAll(tasks);
+    }
+
+    /**
+     * Generates a unique identifier for this repair order.
+     * The value is randomly generated and used to distinguish
+     * this order from all other repair orders in the system.
+     *
+     * @return a randomly generated order ID
+     */
+    private Integer generateOrderId() {
+        return idGenerator.nextInt(MAX_ORDER_ID_VALUE);
+    }
+  
 
     /**
       * Calculates and sets the estimated completion date for this repair order.

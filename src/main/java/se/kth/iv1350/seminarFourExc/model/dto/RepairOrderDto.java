@@ -86,12 +86,24 @@ public class RepairOrderDto {
    public String getProblemDescription(){
        return this.problemDescription;
    }
-  
+   
+    public String getDiagnosticReport(){
+       return this.diagnosticReport;
+   }
+     
    public Integer getOrderId(){
        return this.orderId;
    }
    
-   public CustomerDto getCustomerDto(){
+   public LocalDate getEstimatedCompletionDate(){
+       return this.estimatedCompletionDate;
+   }
+   
+   public LocalDate getDate(){
+       return this.date;
+   }
+      
+   public CustomerDto getCustomer(){
        return this.customerDto;
    }
    
@@ -99,16 +111,15 @@ public class RepairOrderDto {
        return this.state;
    }
    
-    public double baseCost() {
+    public double getBaseCost() {
         return this.baseCost;
     }
     
-    public double finalCost() {
+    public double getFinalCost() {
         return this.finalCost;
     }
-    
-
-
-
-
+        
+    public List<RepairTaskDto> getRepairTasks() {
+        return this.repairTasks;
+    }
 }

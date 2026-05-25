@@ -31,9 +31,17 @@ public class RepairTaskDto {
         this.state = repairTask.getState();
         this.taskDescription = repairTask.getTaskDescription();
     }
-
-
-
     
+    public String getTaskDescription() {
+        return this.taskDescription;
+    }
     
+    public RepairTaskState getState() {
+        return this.state;
+    }
+        
+    public double getCost() {
+        return this.cost;
+    }
+
 }

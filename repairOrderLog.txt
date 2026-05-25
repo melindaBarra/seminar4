@@ -1,6 +1,6 @@
-Order ID: 990
+Order ID: 932
 State: NEWLY_CREATED
-Date of order placement: 2026-05-14
+Date of order placement: 2026-05-25
 Date of estimated completion: Not specified yet
 Problem Description: The customer's bike always gets a flat tire
 Diagnostic report: Not specified yet
@@ -8,10 +8,10 @@ Repair tasks: Not specified yet
 Base cost: 0.0
 Final cost: 0.0
 Customer[Name: Nils, Email: nils@kth.se, PhoneNo: 0731234567]
-Bike[Brand: Monark, Model name: Karin, SerialNo: SVE123]
-Order ID: 990
+Bike[Brand: Monark, Model name: Karin, SerialNo: SVE1234567]
+Order ID: 932
 State: READY_FOR_APPROVAL
-Date of order placement: 2026-05-14
+Date of order placement: 2026-05-25
 Date of estimated completion: Not specified yet
 Problem Description: The customer's bike always gets a flat tire
 Diagnostic report: A wheel is missing
@@ -20,11 +20,11 @@ Repair task[Task description: Add a new wheel, Cost: 150.0, State: INCOMPLETE]
 Base cost: 300.0
 Final cost: 255.0
 Customer[Name: Nils, Email: nils@kth.se, PhoneNo: 0731234567]
-Bike[Brand: Monark, Model name: Karin, SerialNo: SVE123]
-Order ID: 990
+Bike[Brand: Monark, Model name: Karin, SerialNo: SVE1234567]
+Order ID: 932
 State: ACCEPTED
-Date of order placement: 2026-05-14
-Date of estimated completion: 2026-05-19
+Date of order placement: 2026-05-25
+Date of estimated completion: 2026-05-30
 Problem Description: The customer's bike always gets a flat tire
 Diagnostic report: A wheel is missing
 Repair task[Task description: Replace brake pads, Cost: 150.0, State: INCOMPLETE]
@@ -32,4 +32,4 @@ Repair task[Task description: Add a new wheel, Cost: 150.0, State: INCOMPLETE]
 Base cost: 300.0
 Final cost: 255.0
 Customer[Name: Nils, Email: nils@kth.se, PhoneNo: 0731234567]
-Bike[Brand: Monark, Model name: Karin, SerialNo: SVE123]
+Bike[Brand: Monark, Model name: Karin, SerialNo: SVE1234567]

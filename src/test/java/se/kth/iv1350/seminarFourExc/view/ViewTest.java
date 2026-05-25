@@ -108,9 +108,9 @@ public class ViewTest {
         view.runFakeExecution(unknownPhoneNo);
 
         String result = outContent.toString();
-        String expResult = "No found customer with phone number: " + unknownPhoneNo;
-        assertTrue(result.contains("ERROR!"), "Error message does not contain the expected 'ERROR!'.");
-        assertTrue(result.contains(expResult), "Error message does not contain the expected cause.");
+
+        String expResult = "ERROR: No customer with the searched phone number '" +unknownPhoneNo +"' exists.";
+        assertTrue(result.contains(expResult), "Error message does not contain the expected error message.");
     }
     
     /**
@@ -128,23 +128,16 @@ public class ViewTest {
         view.runFakeExecution(phoneNo);
 
         String result = outContent.toString();
-        String expResult = "Something went wrong. Please try again later.";
-        assertTrue(result.contains("ERROR!"), "Error message does not contain the expected 'ERROR!'.");
-        assertTrue(result.contains(expResult), "Error message does not contain the expected cause.");
+        String expResult = "ERROR: Something went wrong. Please try again later.";
+        assertTrue(result.contains(expResult), "Error message does not contain the expected error message.");
     }
     
 
     @Test
     public void testRunFakeExecutionUnexpectedFailure() {
         String phoneNo = "0000000000";
-        Controller fakeController = new Controller(null, null, null) {
-            @Override
-            public CustomerDto searchCustomer(String phoneNo) {
-                throw new RuntimeException("Unexpected fail");
-            }
-        };
-
-        View view = new View(fakeController);
+        
+        View view = new View(createAnonymousContr());
         view.runFakeExecution(phoneNo);
 
         String result = outContent.toString();
@@ -164,6 +157,17 @@ public class ViewTest {
         return new View(contr);
     }
 
+    private Controller createAnonymousContr() {
+        Controller fakeController = new Controller( CustomerRegistry.getInstance(), RepairOrderRegistry.getInstance(),
+        new ExceptionFileLogger()) {
+            @Override
+            public CustomerDto searchCustomer(String phoneNo) {
+                throw new RuntimeException("Unexpected fail");
+            }
+        };
+        
+        return fakeController;
+    }
 }
 
 

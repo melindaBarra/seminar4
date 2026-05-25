@@ -37,4 +37,13 @@ public class FileLogger implements Logger {
     public void log(String message) {
         logStream.println(message);
     }
+    
+    /**
+     * Writes the entire stacktrace to the log file.
+     * @param e the exception whose stack trace will be written to the log
+     */
+    @Override
+    public void logException(Exception e) {
+        e.printStackTrace(logStream); 
+    }
 }

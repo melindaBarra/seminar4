@@ -4,7 +4,9 @@
  */
 package se.kth.iv1350.seminarFourExc.view;
 import se.kth.iv1350.seminarFourExc.model.RepairOrderObserver;
-import se.kth.iv1350.seminarFourExc.model.RepairOrder;
+import se.kth.iv1350.seminarFourExc.model.dto.RepairOrderDto;
+import se.kth.iv1350.seminarFourExc.integration.RepairOrderRegistryObserver;
+
 
 
 /**
@@ -13,12 +15,21 @@ import se.kth.iv1350.seminarFourExc.model.RepairOrder;
  * This observer writes the string representation of a repair order
  * to {@code System.out} every time the order gets updated.
  */
-public class RepairOrderView implements RepairOrderObserver {
+public class RepairOrderView implements RepairOrderObserver, RepairOrderRegistryObserver {
+    
+    @Override
+    public void repairOrderUpdate(RepairOrderDto repairOrderDto) {
+        printUpdatedOrder(repairOrderDto);
+    }
 
     @Override
-    public void repairOrderUpdate(RepairOrder repairOrder) {
+    public void newRepairOrderCreated(RepairOrderDto repairOrderDto) {
+        printUpdatedOrder(repairOrderDto);
+    }
+
+    private void printUpdatedOrder(RepairOrderDto repairOrderDto) {
         System.out.println("--- Updated Repair Order ---");
-        String stringFormat = StringRepresentationUtil.repairOrderToString(repairOrder);
+        String stringFormat = StringRepresentationUtil.repairOrderToString(repairOrderDto);
         System.out.println(stringFormat);
     }
 

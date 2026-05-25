@@ -4,7 +4,7 @@
  */
 package testUtil;
 import se.kth.iv1350.seminarFourExc.model.RepairOrderObserver;
-import se.kth.iv1350.seminarFourExc.model.RepairOrder;
+import se.kth.iv1350.seminarFourExc.model.dto.RepairOrderDto;
 
 
 
@@ -15,7 +15,7 @@ public class TestObserver implements RepairOrderObserver {
     public boolean notified = false;
 
     @Override
-    public void repairOrderUpdate(RepairOrder order) {
+    public void repairOrderUpdate(RepairOrderDto orderDto) {
         notified = true;
     }
 }
